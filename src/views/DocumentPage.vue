@@ -131,6 +131,7 @@ export default {
       const textView = document.getElementById("text-view");
       if (textView) {
         const top = textView.getBoundingClientRect().top;
+        console.log('updateMiradorTopPosition', textView.getBoundingClientRect())
         miradorViewBoundingTop.value = top < 0 ? - Math.floor(top) : 0;
       }
     };
@@ -247,13 +248,11 @@ export default {
     });
 
     onMounted(() => {
-      const appView = document.getElementById("app");
-      appView.addEventListener('scroll', updateMiradorTopPosition);
+      window.addEventListener('scroll', updateMiradorTopPosition);
     });
 
     onUnmounted(() => {
-      const appView = document.getElementById("app");
-      appView.removeEventListener('scroll', updateMiradorTopPosition);
+      window.removeEventListener('scroll', updateMiradorTopPosition);
     });
 
     const route = useRoute();
@@ -488,6 +487,7 @@ export default {
 }
 .document-views {
   width: 100%;
+  overflow-x: hidden;
 }
 .toc-area-aside {
   display: none;
